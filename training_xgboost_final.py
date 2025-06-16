@@ -68,10 +68,6 @@ DROP_PAY_COLS = True
 if DROP_PAY_COLS:
     df.drop(columns=PAY_COLS, inplace=True)
 
-for col in BILL_COLS:
-    df[f"UTIL_{col[-1]}"] = df[col] / (df["LIMIT_BAL"] + EPS)
-df["UTIL_AVG"] = df[[f"UTIL_{i}" for i in range(1, 7)]].mean(axis=1)
-
 df["TOTAL_PAY"] = df[PAY_AMT_COLS].sum(axis=1)
 df["PAYMENT_RATIO"] = df["TOTAL_PAY"] / (df[BILL_COLS].sum(axis=1) + 1)
 
@@ -90,7 +86,7 @@ ID_COL = "ID"
 
 print(df.columns)
 
-X = df[["LIMIT_BAL", "BILL_AVG", "PAY_AVG", 'UTIL_AVG', 'TOTAL_PAY', 'PAYMENT_RATIO']]
+X = df[["LIMIT_BAL", "BILL_AVG", "PAY_AVG", 'TOTAL_PAY', 'PAYMENT_RATIO']]
 y = df[TARGET]
 feature_names: List[str] = X.columns.tolist()
 print(f"📈  Features: {len(feature_names)}")
