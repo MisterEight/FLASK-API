@@ -87,7 +87,10 @@ df.fillna(0, inplace=True)
 TARGET = "default.payment.next.month"
 ID_COL = "ID"
 
-X = df.drop(columns=[ID_COL, TARGET])
+print(df.columns)
+
+X = df[["LIMIT_BAL","BILL_AMT1","BILL_AMT2","BILL_AMT3","BILL_AMT4","BILL_AMT5","BILL_AMT6","PAY_AMT1","PAY_AMT2","PAY_AMT3","PAY_AMT4", "PAY_AMT5", "PAY_AMT6", "PAY_AVG",'UTIL_1', 'UTIL_2', 'UTIL_3',
+       'UTIL_4', 'UTIL_5', 'UTIL_6', 'UTIL_AVG', 'TOTAL_PAY', 'PAYMENT_RATIO']]
 y = df[TARGET]
 feature_names: List[str] = X.columns.tolist()
 print(f"📈  Features: {len(feature_names)}")
