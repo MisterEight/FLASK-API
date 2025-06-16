@@ -115,4 +115,7 @@ def predict_default():
 
 # -----------------------------------------------------------------------------
 if __name__ == "__main__":  # pragma: no cover
-    app.run(debug=True)
+    # When running inside Docker we want to listen on all interfaces so the
+    # container port can be exposed. Default Flask host is 127.0.0.1 which would
+    # prevent access from outside the container.
+    app.run(debug=True, host="0.0.0.0", port=5000)

@@ -1,0 +1,7 @@
+flask
+sqlalchemy
+pymysql
+python-dotenv
+numpy
+pandas
+xgboost
