@@ -77,19 +77,11 @@ def predict_default():
     # ---- Garantir presença das features ----
     missing = [f for f in FEATURE_NAMES if f not in data]
     # PAY_AVG pode ser calculado se faltar
-    if "PAY_AVG" in missing:
-        missing.remove("PAY_AVG")
     if missing:
         return jsonify({"erro": f"Faltam features: {missing}"}), 400
 
     # Copia para DataFrame (garante coerência de tipos)
     df = pd.DataFrame([data])
-
-    # Cria PAY_AVG se não veio
-    if "PAY_AVG" not in df.columns:
-        if not all(col in df.columns for col in PAY_COLS):
-            return jsonify({"erro": "Necessário fornecer PAY_AVG ou todas as PAY_*"}), 400
-        df["PAY_AVG"] = df[PAY_COLS].mean(axis=1)
 
     # Se o payload contém PAY_* e o modelo foi treinado SEM elas, simplesmente
     # dropamos para evitar coluna extra – o booster ignora colunas desconhecidas

@@ -63,6 +63,7 @@ PAY_AMT_COLS = [f"PAY_AMT{i}" for i in range(1, 6 + 1)]
 
 print("➕  Features derivadas …")
 df["PAY_AVG"] = df[PAY_COLS].mean(axis=1)
+df["BILL_AVG"] = df[BILL_COLS].mean(axis=1)
 DROP_PAY_COLS = True
 if DROP_PAY_COLS:
     df.drop(columns=PAY_COLS, inplace=True)
@@ -89,8 +90,7 @@ ID_COL = "ID"
 
 print(df.columns)
 
-X = df[["LIMIT_BAL","BILL_AMT1","BILL_AMT2","BILL_AMT3","BILL_AMT4","BILL_AMT5","BILL_AMT6","PAY_AMT1","PAY_AMT2","PAY_AMT3","PAY_AMT4", "PAY_AMT5", "PAY_AMT6", "PAY_AVG",'UTIL_1', 'UTIL_2', 'UTIL_3',
-       'UTIL_4', 'UTIL_5', 'UTIL_6', 'UTIL_AVG', 'TOTAL_PAY', 'PAYMENT_RATIO']]
+X = df[["LIMIT_BAL", "BILL_AVG", "PAY_AVG", 'UTIL_AVG', 'TOTAL_PAY', 'PAYMENT_RATIO']]
 y = df[TARGET]
 feature_names: List[str] = X.columns.tolist()
 print(f"📈  Features: {len(feature_names)}")
