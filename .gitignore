@@ -1,4 +1,4 @@
-/.env
-/.ipynb_checkpoints
-/1.7
-/__pycache__
+.env
+.ipynb_checkpoints/
+1.7/
+__pycache__/
